@@ -1,0 +1,43 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-02 11:42:55
+ * @LastEditTime: 2021-08-02 12:02:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /canvas/learn/demo01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas demo02</title>
+    <style>
+        canvas { border: 1px solid black; }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="150" height="150"></canvas>
+
+    <script>
+        function draw() {
+            /** @type {HTMLCanvasElement} */
+            const canvas = document.querySelector('#canvas');
+            if (canvas.getContext) {
+                const ctx = canvas.getContext('2d');
+                console.log({ ctx });
+
+                ctx.beginPath();
+                ctx.moveTo(75, 50);
+                ctx.lineTo(100, 75);
+                ctx.lineTo(100, 25);
+                ctx.fill();
+            }
+        }
+        window.onload = draw;
+    </script>
+    
+</body>
+</html>

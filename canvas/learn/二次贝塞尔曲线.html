@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-02 11:42:55
+ * @LastEditTime: 2021-08-02 13:21:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /canvas/learn/demo01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas demo03</title>
+    <style>
+        canvas { border: 1px solid black; }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="150" height="200"></canvas>
+
+    <script>
+        function draw() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+
+                // 二次贝塞尔曲线
+                ctx.beginPath();
+                ctx.moveTo(75, 25);
+                ctx.quadraticCurveTo(25, 25, 25, 62.5);
+                ctx.quadraticCurveTo(25, 100, 50, 100);
+                ctx.quadraticCurveTo(50, 120, 30, 125);
+                ctx.quadraticCurveTo(60, 120, 65, 100);
+                ctx.quadraticCurveTo(125, 100, 125, 62.5);
+                ctx.quadraticCurveTo(125, 25, 75, 25);
+                ctx.stroke();
+            }
+        }
+
+
+        window.onload = draw;
+    </script>
+    
+</body>
+</html>
