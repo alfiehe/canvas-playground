@@ -1,0 +1,102 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-02 11:42:55
+ * @LastEditTime: 2021-08-05 13:36:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /canvas/learn/demo01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+<body>
+    <style>
+        * {
+            user-select: none;
+        }
+        img {
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        canvas {
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <div>
+        <img src="../../asset/600x300_001.jpeg" alt="">
+        <canvas id="canvas" width="600" height="300"></canvas>
+    </div>
+
+    <script>
+        function draw() {
+            /** @type {HTMLCanvasElement} */
+            const canvas = document.getElementById('canvas');
+            if (canvas.getContext){
+                const ctx = canvas.getContext('2d');
+
+                 // 添加遮罩层
+                ctx.fillStyle = 'red';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // 添加文本
+                const text = '若水三千';
+                ctx.font = '120px KaiTi';
+                ctx.fillStyle = '#fff';
+                ctx.strokeStyle='#000';
+                ctx.lineWidth = '5';
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+                ctx.strokeText(text, canvas.width / 2, canvas.height / 2);
+
+                
+                // 开关
+                let isClear = false;
+
+                canvas.addEventListener('mousedown', (e) => {
+                    isClear = true;
+                });
+                canvas.addEventListener('mousemove', (e) => {
+                    if (!isClear) return;
+                    const clearWidth = 50;
+                    const clearHeight = 50;
+                    ctx.clearRect(e.offsetX, e.offsetY, clearWidth, clearHeight);
+                });
+                canvas.addEventListener('mouseup', () => {
+                    isClear = false;
+                });
+            }
+        }
+        function setImageUrl() {
+            const img = document.querySelector('img');
+            const imgArr = [
+                '../../asset/600x300_001.jpeg',
+                '../../asset/600x300_002.jpeg',
+                '../../asset/600x300_003.jpeg',
+                '../../asset/600x300_004.jpeg',
+                '../../asset/600x300_005.jpeg',
+                '../../asset/600x300_006.jpeg',
+            ]
+            const random = Math.floor(Math.random() * 6);
+            img.src = imgArr[random];
+        }
+
+        setImageUrl();
+        window.onload = draw;
+    </script>
+    
+</body>
+</html>
