@@ -1,0 +1,61 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-02 11:42:55
+ * @LastEditTime: 2021-08-05 12:01:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /canvas/learn/demo01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style>
+        canvas { background:black; }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="200" height="200"></canvas>
+
+    <script>
+        function draw() {
+            /** @type {HTMLCanvasElement} */
+            const canvas = document.getElementById('canvas');
+            if (canvas.getContext){
+                const ctx = canvas.getContext('2d');
+                
+                // 记录画笔开关状态
+                let isDraw = false;
+
+                // 按下鼠标，打开画笔状态，记录初始点位置。
+                canvas.addEventListener('mousedown', (e) => {
+                    isDraw = true;
+                    ctx.beginPath();
+                    ctx.moveTo(e.offsetX, e.offsetY);
+                });
+
+                // 移动鼠标过程中画画
+                canvas.addEventListener('mousemove', (e) => {
+                    if (!isDraw) return;
+                    
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.strokeStyle = 'red';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+                // 鼠标抬起关闭画笔状态
+                canvas.addEventListener('mouseup', () => {
+                    isDraw = false;
+                });
+            }
+        }
+
+        window.onload = draw;
+    </script>
+    
+</body>
+</html>
